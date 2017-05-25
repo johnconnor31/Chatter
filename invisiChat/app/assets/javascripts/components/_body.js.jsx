@@ -10,16 +10,16 @@ var Body=React.createClass({
     $.getJSON('api/v1/items.json',(response)=>{this.setState({items:response})});
   },
   handleSubmit(item){
+    console.log('this is :'+this);
     var tmpItems= this.state.items;
     tmpItems.push(item);
     this.setState({items:tmpItems});
-  }
+  },
   render(){
-    this.submitHandle=handleSubmit.bind(this);
       return (
       <div>
-        <NewItem submit={this.submitHandle}/>
-        <AllItems Items={this.state.items} />
+        <AllItems items={this.state.items} />
+        <NewItem submit={this.handleSubmit}/>
       </div>
     );
 }
