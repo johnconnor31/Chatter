@@ -6,10 +6,10 @@ class Api::V1::ItemsController < Api::V1::BaseController
 		respond_with :api,:v1,Item.create(item_filtered)
 	end
 	def destroy
-		respond_with Item.destroy(params_filtered)
+		respond_with Item.destroy(params[:id])
 	end
 	def update
-		item= Item.find(params_filtered[:id])
+		item= Item.find(item_filtered[:id])
 		item.update_attributes(item)
 		respond_with item,json: item
 	end

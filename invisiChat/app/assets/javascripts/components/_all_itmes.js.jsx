@@ -1,11 +1,9 @@
 var AllItems= React.createClass({
   render(){
+    var delHandler= this.props.deleteHandle;
     var items= this.props.items.map(function(item){
       return (
-        <div key={item.id}>
-        <div>{item.name}</div>
-        <div>{item.description}</div>
-        </div>
+        
       );
     });
 

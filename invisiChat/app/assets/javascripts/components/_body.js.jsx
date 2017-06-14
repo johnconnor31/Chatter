@@ -15,10 +15,24 @@ var Body=React.createClass({
     tmpItems.push(item);
     this.setState({items:tmpItems});
   },
+  itemDeleted(id){
+    var result = this.state.items.filter((item)=>{
+      return item.id!=id;
+    });
+    this.setState({items:result});
+  },
+  handleDelete(id){
+    console.log(id);
+    $.ajax({
+      url:`api/v1/items/${id}`,
+      type:'DELETE',
+      success:this.itemDeleted(id)
+    });
+  },
   render(){
       return (
       <div>
-        <AllItems items={this.state.items} />
+        <AllItems items={this.state.items} deleteHandle={this.handleDelete} />
         <NewItem submit={this.handleSubmit}/>
       </div>
     );
