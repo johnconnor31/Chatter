@@ -29,10 +29,24 @@ var Body=React.createClass({
       success:this.itemDeleted(id)
     });
   },
+  itemEdited(item){
+    var result = this.state.items.filter((item)=>{
+      return item.id!=id;
+    });
+    this.setState({items:result});
+  },
+  handleEdit(item){
+    console.log(id);
+    $.ajax({
+      url:`api/v1/items/${id}`,
+      type:'DELETE',
+      success:this.itemDeleted(id)
+    });
+  },
   render(){
       return (
       <div>
-        <AllItems items={this.state.items} deleteHandle={this.handleDelete} />
+        <AllItems items={this.state.items} deleteHandle={this.handleDelete} editHandle={this.handleEdit} />
         <NewItem submit={this.handleSubmit}/>
       </div>
     );

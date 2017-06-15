@@ -1,9 +1,10 @@
 var AllItems= React.createClass({
   render(){
     var delHandler= this.props.deleteHandle;
+    var editHandler= this.props.editHandle;
     var items= this.props.items.map(function(item){
-      return (
-        
+      return (<Item key={item.id} id={item.id} name={item.name} description={item.description} 
+       delHandle={delHandler} editHandler={editHandler} />
       );
     });
 
