@@ -1,29 +1,44 @@
 var Item = React.createClass({
-	onInitialize(){
-		this.state={
-			editMode:false,
-			name:null,
-			description:null,
-		}	
-	}
-	onEdit(){
-		if(this.state.editMode){
 
-		}
-		this.state={
-			editMode:!this.state.editMode
-		}
-	}
+  getInitialState(){
+    return {
+      name:[],
+      text:[],
+      editable:false
+    }
+  },
+  handleEdit(){
+    if(this.state.editable){
 
+  }
+    this.setState({
+      editable:!this.state.editable
+    });
+  },
+  updateName(e){
+      this.setState({
+        name:e.target.value
+        });
+    },
+    updateText(e){
+      this.setState({
+        text:e.target.value
+        });
+      console.log(this.state);
+    },
   render(){
-  	var nameField= this.state.editable? <input name='name' value={this.props.name}/>:{this.props.name};
-  	var textField= this.state.editable?<input name='description' value={this.props.description}/>:{this.props.description};
+    var delHandle= this.props.delHandle;
+    var inputField= this.state.editable?<div><input value={this.props.name} onChange={this.updateName} name='name' /></div>:<div>{this.props.name}</div>;
+    var textField= this.state.editable?<div><input value={this.props.description} onChange={this.updateText} name='value' /></div>:<div>{this.props.description}</div>;
+    var edit = this.state.editable? <p>Submit</p>:<p>Edit</p>;
+    var remove = this.state.editable? null:<button onClick={()=>{this.props.delHandle(item.id);}}>Remove</button>;
     return(<div key={this.props.id}>
-    	<div>{nameField}</div>
-    	<div>{textField}</div>
-        <div><button onClick={()=>{this.props.delHandler(item.id);}}>Remove</button>
-        <button onClick={()=>{this.props.editHandler(item.id);}}>Edit</button>
+        {inputField}
+        {textField}
+        <div>{remove}
+        <button onClick={this.handleEdit}>{edit}</button>
         </div>
-        </div>);
+        </div>
+        );
   }
 });

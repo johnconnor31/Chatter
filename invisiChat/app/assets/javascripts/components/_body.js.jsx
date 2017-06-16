@@ -9,7 +9,7 @@ var Body=React.createClass({
     console.log('body mounted');
     $.getJSON('api/v1/items.json',(response)=>{this.setState({items:response})});
   },
-  handleSubmit(item){
+  handleNew(item){
     console.log('this is :'+this);
     var tmpItems= this.state.items;
     tmpItems.push(item);
@@ -46,8 +46,8 @@ var Body=React.createClass({
   render(){
       return (
       <div>
-        <AllItems items={this.state.items} deleteHandle={this.handleDelete} edithandle={itemEdited}/>
-        <NewItem submit={this.handleSubmit}/>
+        <AllItems items={this.state.items} deleteHandle={this.handleDelete} editHandle={this.handleEdit} />
+        <NewItem submit={this.handleNew} />
       </div>
     );
 }
