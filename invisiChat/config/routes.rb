@@ -8,6 +8,16 @@ Rails.application.routes.draw do
   	namespace :v1 do 
   		resources :items,only:[:create,:update,:index,:destroy]
 	end
+  end
+  namespace :api do
+    namespace :v1 do 
+      resources :users,only:[:create,:update,:index,:destroy]
+  end
+  end
+  namespace :api do
+    namespace :v1 do 
+      resources :chatmsgs,only:[:create,:update,:index,:destroy],defaults: { format: 'json' }
+  end
    end
    root to: 'reactitem#index'
 end
